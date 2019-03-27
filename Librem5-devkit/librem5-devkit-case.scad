@@ -3,14 +3,15 @@
    https://www.youmagine.com/designs/librem5-devkit-case
 */
 
-//import("case.stl");
+//import("case-withhole.stl");
 
 base=3;
 wall=2.5;
+inset=5;
 
-d=91;
-w=180;
-h=30;
+d=92;
+w=181;
+h=21 + inset;
 
 $fn=60;
 
@@ -41,66 +42,68 @@ module quarter( h, d, a ) {
 }
 
 translate([1,1,base])
-quarter(25, 23, 0);
+quarter(h-5, 23, 0);
 translate([ w+wall, wall, base] )
-    quarter(22, 23, 90);
+    quarter(h-8, 23, 90);
 translate([ 170 + wall, d+wall, base] )
-    half(25, 17, 180);
+    half(h-5, 17, 180);
 translate([ wall, d+wall, base] )
-    quarter(25, 18, 270);
+    quarter(h-5, 18, 270);
 
-/*
-color( "green" )
-            translate([0,wall,wall/2])
-            rotate([-90, 0,0])
-                cylinder( d=wall, 2, true);
-            translate([wall,0,wall/2])
-            rotate([0, 90,0])
-                cylinder( d=wall, 2, true);
-*/
 color( "red" )
     difference() {
         minkowski() {
             items = 2;
-/*            
-            translate([0,0,-wall/2])
-            rotate([-90, 0,0])
-                cylinder( d=wall, 2, false);
-            translate([0,0,0])
-            rotate([0, 90,0])
-                cylinder( d=wall, 2, false);
-*/
             translate([0, 0, 0])
                 cylinder( d=wall, base, true);
             translate([wall-1, wall-1, 0])
                 cube( [w+2, d+2, h ] );
         };
-        
+ 
         union() {
             // devkit cutout
             translate([wall,wall,base])
                 cube( [w, d, h+1 ] );
-            translate([47.5+wall,d+wall/2,25+base])
-                cube( [60, 4, 5 ] );
-            translate([16+wall,-1,22+base])
-                cube( [20, 4, 4 ] );
-            
+
             //switches
-            translate([79+wall,-1,24+base])
+            translate([47+wall,d+wall/2,h-5+base])
+                cube( [51, 4, 5 ] );
+
+            // Smart card
+            translate([18+wall,-1,h-8+base])
+                cube( [20, 4, 4 ] );
+
+            // Push buttons
+            translate([80+wall,-1,h-6+base])
                 cube( [4.5, 2*wall, 2] );
-            translate([95.5+wall,-1,24+base])
+            translate([96.5+wall,-1,h-6+base])
                 cube( [4.5, 2*wall, 2] );
-            translate([116+wall,-1,24+base])
+            translate([117+wall,-1,h-6+base])
                 cube( [4.5, 2*wall, 2] );
-            translate([135+wall,-1,24+base])
+
+            // SIM card
+            translate([136+wall,-1,h-6+base])
                 cube( [16, 2*wall, 4] );
-            
-            // bottom
-            translate([-1,10+wall,21+base])
+
+            // bottom - hdmi, usb, SD card
+            translate([-1,10+wall,h-9+base])
                 cube( [wall*2, 70, 5 ] );
-            translate([-1,50+wall,12+base])
+            // ethernet
+            translate([-1,51+wall,h-18+base])
                 cube( [wall*2, 18, 9 ] );
-            translate([-1,68+wall,19+base])
+            // audio
+            translate([-1,68+wall,h-11+base])
                 cube( [wall*2, 14, 8 ] );
+
+            // heatsink
+            translate([90,35,-1])
+                cylinder( 2*base, d=33, true );
+
+            // debug
+            translate([113.25,2*wall+1.75,-1])
+                cylinder( 2*base, d=6, true);
+            translate([105,2*wall,-1])
+                cube( [16.5, 3.5, 2*base]);
+
         }
     }
