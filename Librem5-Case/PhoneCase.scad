@@ -81,9 +81,9 @@ module camera_cuts() {
     translate([13.5+cX,49.5+cY,-cZ/2])
         cylinder(h=2*cZ, r1=6, r2=4);
     // Flash
-    translate([13.5+cX,37+cY,-cZ/2])
+    translate([13.5+cX,37.5+cY,-cZ/2])
         scale([2.5,1,1])
-        cylinder(h=2*cZ, r1=4, r2=2);    
+        cylinder(h=2*cZ, r1=4, r2=1.5);
 }
 
 module hks_cut() {
