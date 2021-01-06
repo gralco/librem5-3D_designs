@@ -37,7 +37,7 @@ module case_base() {
     // back bezel
     // h = 4
     // d = 4
-    bO = r+5;
+    bO = r+2;
     translate([bO,bO,0])
         cylinder(h=4, r=r-2);
     translate([bO, oY-bO,0])
