@@ -4,15 +4,12 @@
 // SPDX-License-Identifier: GPL-3.0+
 //
 
-// Evergreen Dimensions
-pX = 153;
-pY = 75;
-pZ = 15;
+// slim needs to be defined before including this file
 
-// Dogwood Dimensions
-//pX = 150;
-//pY = 75;
-//pZ = 15;
+// Phone Dimensions
+pX = (evergreen == 1) ? 153-slim : 150-slim;
+pY = 75-slim;
+pZ = 15-slim;
 
 module phone() {
     $fn=60;
