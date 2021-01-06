@@ -4,15 +4,18 @@
 // SPDX-License-Identifier: GPL-3.0+
 //
 
-// This can create a dogwood or evergreen case by changing the dimensions
-// in the PhomeOutline.scad file
+// Configuration options
+evergreen = 1; // 0 for dogwood case
+slim = 1; // default to bumper case
+raingear = 1; // 1 don't add any cutouts
+
 include <PhoneOutline.scad>;
 
 // Case thickness
-cX = 3.5;
-cY = 2.5;
-cZ = 2;
- 
+cX = (slim == 0) ? 3.5 : 1.2;
+cY = (slim == 0) ? 2.5 : 1.2;
+cZ = (slim == 0) ? 2 : 1;
+
 // Case outside Dimesions
 oY = pY+2*cY;
 oX = pX+2*cX;
@@ -97,20 +100,22 @@ module hks_cut() {
 }
 
 module vol_cut() {
+    d = (raingear == 0) ? cY*2 : cY;
     hull() {
     translate([cX+21, pY+cY-cY/2, cZ+8.25])
-        cube([36, cY*2, 4]);
+        cube([36, d, 4]);
     // bezel edge
-    translate([cX+18, pY+2*cY, cZ+7.25])
-        cube([42, cY, 6]);
+    if (raingear == 0)
+        translate([cX+18, pY+2*cY, cZ+7.25])
+            cube([42, cY, 6]);
     }
 }
 
 module top_cuts() {
     // Headphone plug
-    translate([-cX/2, cY+19, cZ+10])
+    translate([-cX, cY+19, cZ+10])
         rotate([0, 90, 0])
-            cylinder(h=cX*2, r1=5, r2=4);
+            cylinder(h=cX*4, r1=5, r2=4);
 }
 
 module bottom_cuts() {
@@ -132,11 +137,13 @@ module case() {
         union() {
             display_cut();
             translate([cX, cY, cZ]) phone();
-            camera_cuts();
-            hks_cut();
             vol_cut();
-            top_cuts();
-            bottom_cuts();
+            if (raingear == 0 ) {
+                camera_cuts();
+                hks_cut();
+                top_cuts();
+                bottom_cuts();
+            }
         }
     }
 }
