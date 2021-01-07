@@ -30,7 +30,7 @@ module phone() {
     // back bezel
     // h = 4
     // d = 4
-    offsetB = r+1.5;
+    offsetB = r+1;
     translate([offsetB,offsetB,0])
         cylinder(h=4, r=r-4);
     translate([offsetB, pY-offsetB,0])
