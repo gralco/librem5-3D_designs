@@ -5,9 +5,10 @@
 //
 
 // slim needs to be defined before including this file
+//slim = (slim > 0) ? slim : 0;
 
 // Phone Dimensions
-pX = (evergreen == 1) ? 153-slim : 150-slim;
+pX = (evergreen == 1) ? 152-slim : 149-slim;
 pY = 75-slim;
 pZ = 15-slim;
 
@@ -29,7 +30,7 @@ module phone() {
     // back bezel
     // h = 4
     // d = 4
-    offsetB = r+3;
+    offsetB = r+1.5;
     translate([offsetB,offsetB,0])
         cylinder(h=4, r=r-4);
     translate([offsetB, pY-offsetB,0])
