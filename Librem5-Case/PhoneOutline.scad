@@ -8,9 +8,9 @@
 //slim = (slim > 0) ? slim : 0;
 
 // Phone Dimensions
-pX = (evergreen == 1) ? 152-slim : 149-slim;
-pY = 75-slim;
-pZ = 15-slim;
+pX = (evergreen == 1) ? 152 : 149;
+pY = 75;
+pZ = 15;
 
 module phone() {
     $fn=60;
