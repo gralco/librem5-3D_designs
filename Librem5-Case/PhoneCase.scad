@@ -6,8 +6,8 @@
 
 // Configuration options
 evergreen = 1; // 0 for dogwood case
-slim = 1; // default to bumper case
-raingear = 1; // 1 don't add any cutouts
+slim = 0; // default to bumper case
+raingear = 0; // 1 don't add any cutouts
 
 include <PhoneOutline.scad>;
 
@@ -127,8 +127,8 @@ module bottom_cuts() {
         cube([cX*2, 10, 3]);
     // USB C
     cutY1=14;
-    translate([pX+cX/2, pY/2-cutY1/2+cY, cZ+6.5])
-        cube([cX*2, cutY1, 7]);
+    translate([pX-cX, pY/2-cutY1/2+cY, cZ+6.5])
+        cube([cX*4, cutY1, 7]);
 }
 
 module case() {
