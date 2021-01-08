@@ -13,8 +13,8 @@ pinch = 0;
 include <PhoneOutline.scad>;
 
 // Case thickness
-cX = (slim == 0) ? 3.5 : 1.2;
-cY = (slim == 0) ? 2.5 : 1.2;
+cX = (slim == 0) ? 3.5 : 1.6;
+cY = (slim == 0) ? 2.5 : 1.6;
 cZ = (slim == 0) ? 2 : 1;
 
 // Case outside Dimesions
