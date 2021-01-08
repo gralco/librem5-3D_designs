@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2020 Purism SPC
+// Copyright (C) 2020-2021 Purism SPC
 //
 // SPDX-License-Identifier: GPL-3.0+
 //
@@ -8,6 +8,7 @@
 evergreen = 1; // 0 for dogwood case
 slim = 0; // default to bumper case
 raingear = 0; // 1 don't add any cutouts
+pinch = 0;
 
 include <PhoneOutline.scad>;
 
@@ -25,17 +26,19 @@ $fn=60;
 r=8;
  
 module case_base() {
+    r1 = r;
+    r2 = r - pinch;
     
     hull() {
     //Main Case
     translate([r,r,4])
-        cylinder(h=oZ-6, r=r);
+        cylinder(h=oZ-6, r1=r1, r2=r2);
     translate([r,oY-r,4])
-        cylinder(h=oZ-6, r=r);
+        cylinder(h=oZ-6, r1=r1, r2=r2);
     translate([oX-r,oY-r,4])
-        cylinder(h=oZ-6, r=r);
+        cylinder(h=oZ-6, r1=r1, r2=r2);
     translate([oX-r,r,4])
-        cylinder(h=oZ-6, r=r);
+        cylinder(h=oZ-6, r1=r1, r2=r2);
     
     // back bezel
     // h = 4
@@ -53,7 +56,7 @@ module case_base() {
     // top bezel
     // h = 2 
     // d = 1
-    tO = r+1;
+    tO = r+1+pinch;
     translate([tO,tO,oZ-2])
         cylinder(h=2, r=r-1);
     translate([tO, oY-tO,oZ-2])
@@ -67,7 +70,7 @@ module case_base() {
 
 module display_cut() {
     hull() {
-    offset = r+4;
+    offset = r+4+pinch;
     translate([offset,offset,oZ-3])
         cylinder(h=4, r=r-1);
     translate([offset, oY-offset,oZ-3])
@@ -100,7 +103,7 @@ module hks_cut() {
 }
 
 module vol_cut() {
-    d = (raingear == 0) ? cY*2 : cY;
+    d = (raingear == 0) ? cY*2 : cY*3/4;
     hull() {
     translate([cX+21, pY+cY-cY/2, cZ+8.25])
         cube([36, d, 4]);
