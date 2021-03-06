@@ -6,9 +6,9 @@
 
 // Configuration options
 evergreen = 1; // 0 for dogwood case
-slim = 0; // default to bumper case
+slim = 1; // default to bumper case
 raingear = 0; // 1 don't add any cutouts
-pinch = 0;
+pinch = 0.75;
 
 include <PhoneOutline.scad>;
 
